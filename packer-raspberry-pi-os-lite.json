@@ -1,0 +1,50 @@
+{
+    "variables": {
+    },
+    "builders": [
+      {
+        "type": "arm-image",
+        "iso_url": "https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-03-25/2021-03-04-raspios-buster-armhf-lite.zip",
+        "iso_checksum": "sha256:ea92412af99ec145438ddec3c955aa65e72ef88d84f3307cea474da005669d39",
+        "target_image_size": 2147483648
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "file",
+        "source": "./rasp.png",
+        "destination": "/home/pi/rasp.png"
+      },
+      {
+        "type": "file",
+        "source": "./scripts/.bash_profile",
+        "destination": "/home/pi/.bash_profile"
+      },
+      {
+        "type": "file",
+        "source": "./scripts/.xinitrc",
+        "destination": "/home/pi/.xinitrc"
+      },
+      {
+        "type": "file",
+        "source": "./scripts/splashscreen.service",
+        "destination": "/etc/systemd/system/splashscreen.service"
+      },
+      {
+        "type": "shell",
+        "inline": [
+          "echo 'Install APT Packages'",
+          "echo nameserver 8.8.8.8 > /etc/resolv.conf",
+          "apt-get update",
+          "apt-get -y install --no-install-recommends xserver-xorg-video-all xserver-xorg-input-all xserver-xorg-core xinit x11-xserver-utils fbi curl",
+          "rm -f /etc/motd",
+          "chown pi:pi -R /home/pi/"
+        ]
+      },
+      {
+        "type": "shell",
+        "script": "./scripts/run.sh"
+      }
+    ]
+  }
+  

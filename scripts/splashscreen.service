@@ -1,0 +1,9 @@
+[Unit]
+Description=Splash screen
+DefaultDependencies=no
+After=local-fs.target
+[Service]
+Type=forking
+ExecStart=sudo /usr/bin/fbi -d /dev/fb0 --vt 1 --noverbose -a /home/pi/rasp.png &
+[Install]
+WantedBy=sysinit.target

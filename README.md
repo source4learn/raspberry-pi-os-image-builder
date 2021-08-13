@@ -1,2 +1,2 @@
 # raspberry-pi-os-image-builder
-Create a customized Raspberry Pi OS Image using Packer
+Build custom Raspberry Pi OS Image with Packer
