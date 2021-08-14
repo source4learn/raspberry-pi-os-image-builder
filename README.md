@@ -33,7 +33,7 @@ sudo apt install git wget build-essential kpartx qemu binfmt-support qemu-user-s
 
 ## Start building ARM image
 
-* For building the ARM image, the Packer uses the provisioners to mount the image on your local file system and to make changes in the base ARM image.
+For building the ARM image, the Packer uses the provisioners to mount the image on your local file system and to make changes in the base ARM image.
 
 Clone the codebase from the GitHub repository and follow the instructions for building ARM images using Packer. Go to the `raspberry-pi-os-image-builder` directory and download the Packer ARM builder plugin from https://github.com/solo-io/packer-builder-arm-image. You need to get the release version `v0.1.6` and make it executable.
 
