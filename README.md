@@ -52,9 +52,12 @@ sudo packer build packer-raspberry-pi-os-lite.json
 ```
 
 ## Summary
-The above setup is based on the `solo-io/packer-builder-arm-image` which is a Packer plugin for ARM images. The alternative Packer ARM plugin `kaczanowski/packer-builder-arm` is also available with some additional features like - extend or build ARM images from scratch.
+The above setup is based on the `solo-io/packer-builder-arm-image` which is a Packer plugin for ARM images. The alternative Packer ARM plugin `kaczanowski/packer-builder-arm` is also available with some additional features like extending the disk size or build ARM images from scratch.
 
 If you encounter an error or problem in this setup, please report in the GitHub repository issues. Reach us in case you need any further assistance.
+
 Email: source4learn@gmail.com
+
 Twitter: @source4learn
+
 LinkedIn: linkedin.com/in/source4learn
