@@ -1,5 +1,6 @@
 # Cache objects
 packer-builder-arm-image
+output-arm-image
 packer_cache/
 
 # Crash log

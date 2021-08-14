@@ -10,5 +10,4 @@ sed -i '/^exit[ /t]*0/i dmesg --console-off\n' /etc/rc.local
 echo "Enable Raspberry Pi Default Services"
 systemctl enable ssh
 systemctl enable getty@
-systemctl enable unblockwifi
 systemctl enable splashscreen
