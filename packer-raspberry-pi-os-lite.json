@@ -1,5 +1,8 @@
 {
   "variables": {
+    "wifi_name": "",
+    "wifi_password": "",
+    "ssh_pub_key_path": ""
   },
   "builders": [
     {
@@ -9,6 +12,29 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "inline": ["touch /boot/ssh"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "wpa_passphrase \"{{user `wifi_name`}}\" \"{{user `wifi_password`}}\" | sed -e 's/#.*$//' -e '/^$/d' >> /etc/wpa_supplicant/wpa_supplicant.conf"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "{{ssh_pub_key_path}}",
+      "destination": "/home/pi/.ssh/authorized_keys"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sed '/PasswordAuthentication/d' -i /etc/ssh/sshd_config",
+        "echo  >> /etc/ssh/sshd_config",
+        "echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config"
+      ]
+    },
     {
       "type": "file",
       "source": "./scripts/.bash_profile",
