@@ -1,0 +1,51 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    # curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+
+    # sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+    # apt-get update
+
+    sudo apt-get install -y qemu-user-static git wget zip unzip build-essential kpartx qemu binfmt-support e2fsprogs dosfstools #packer
+
+    export PACKER_RELEASE="1.6.6"
+    
+    wget https://releases.hashicorp.com/packer/${PACKER_RELEASE}/packer_${PACKER_RELEASE}_linux_amd64.zip
+
+    unzip packer_${PACKER_RELEASE}_linux_amd64.zip
+
+    PATH=$PATH:$(pwd)
+
+    export PACKER_ARM_BUILDER_VERSION="0.1.6"
+
+    wget https://github.com/solo-io/packer-builder-arm-image/releases/download/v${PACKER_ARM_BUILDER_VERSION}/packer-builder-arm-image
+
+    chmod +x packer-builder-arm-image
+
+    git clone -b bullseye https://github.com/UnoSD/raspberry-pi-os-image-builder.git
+
+    mv packer-builder-arm-image raspberry-pi-os-image-builder/
+
+    cd raspberry-pi-os-image-builder
+
+    sudo ../packer build packer-raspberry-pi-os-lite.json
+
+    du -hs output-arm-image/image
+    
+    zip -r rpi-arm-image.zip output-arm-image/image
+
+    du -hs 
+
+    pwd
+  displayName: 'Build image'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/raspberry-pi-os-image-builder/rpi-arm-image.zip'
+    publishLocation: 'pipeline'
