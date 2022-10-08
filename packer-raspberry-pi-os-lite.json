@@ -42,11 +42,6 @@
     },
     {
       "type": "file",
-      "source": "./scripts/.xinitrc",
-      "destination": "/home/pi/.xinitrc"
-    },
-    {
-      "type": "file",
       "source": "./scripts/splashscreen.service",
       "destination": "/etc/systemd/system/splashscreen.service"
     },
