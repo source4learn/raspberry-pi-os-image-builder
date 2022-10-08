@@ -41,14 +41,9 @@
       "destination": "/home/pi/.bash_profile"
     },
     {
-      "type": "file",
-      "source": "./scripts/splashscreen.service",
-      "destination": "/etc/systemd/system/splashscreen.service"
-    },
-    {
       "type": "shell",
       "inline": [
-        "echo nameserver 8.8.8.8 > /etc/resolv.conf",
+        "echo nameserver 1.1.1.1 > /etc/resolv.conf",
         "apt-get update",
         "apt-get -y install --no-install-recommends curl",
         "rm -f /etc/motd",
